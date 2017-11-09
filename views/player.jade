@@ -4,7 +4,13 @@ block content
   h1 #{title}
   p #{description}
   #player
-  
+
   script(src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js")
   script
     | var player = new Clappr.Player({source: '#{variant_urls[0].url}', parentId: "#player"});
+
+  script
+    | var stream = new Clappr.Player({source: '#{stream_url}', parentId: "#stream"}); console.log(stream_url);
+
+  script
+    | fetch('/video/next/#{id}').then(function(res) { return res.json() }).then(function(id) { window.location.href = '/video/' + id; });
